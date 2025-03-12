@@ -1,9 +1,9 @@
-<!-- <script setup lang="ts">
-definePageMeta({
-  middleware: 'auth'
-})
-</script> -->
+<script setup lang="ts">
+  import Title from '@/components/Title';
+</script>
 
 <template>
-    <h1>Welcome to your settings</h1>
+  <div class="w-full">
+    <Title title="Configuration" subtitle="Settings" />
+  </div>
 </template>
