@@ -29,17 +29,17 @@
             <div class="flex items-center">
                 <button class="border mr-3 bg-black rounded-md flex justify-between items-center py-2 px-4">
                     <span class="text-white mr-2">Download</span>
-                    <Download color="white" size="18" />
+                    <Download color="white" :size="18" />
                 </button>
                 <VueDatePicker class="py-2" range />
             </div>
         </div>
-        <!-- <BarChart :period="option" /> -->
+        <BarChart :period="option" />
         <div class="flex justify-between mt-3">
-            <div class="w-2/3 pr-4">
+            <div class="w-1/2 pr-4">
                 <ApplicationsTable limit="10" />
             </div>
-            <div class="pl-4 w-1/3">
+            <div class="pl-4 w-1/2">
                 <JobsTable limit="10" />
             </div>
         </div>

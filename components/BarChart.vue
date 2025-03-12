@@ -1,5 +1,5 @@
-<script setup lang="ts">
-    import { onMounted, ref } from 'vue';
+<script lang="ts">
+    import { onMounted, ref, defineProps } from 'vue';
     import { Bar } from 'vue-chartjs';
     import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 
@@ -16,28 +16,26 @@
         datasets: []
     });
 
-    // onMounted(() => {
-    //     const getStats = async () => {
-    //         try {
-    //             const result = await statisticsService.applicationStatistics(props.period);
-    //             console.log(result)
-    //             if (result) stats.value = result
-    //         } catch (e) {
-    //             alert(`An error occurred when fetching this data`)
-    //         }
-    //     }
-    //     getStats();
-    // })
+    onMounted(() => {
+        console.log
+        const getStats = async () => {
+            try {
+                const result = await statisticsService.applicationStatistics(props.period);
+                console.log({result})
+                if (result) stats.value = result
+            } catch (e) {
+                alert(`An error occurred when fetching this data`)
+            }
+        }
+        getStats();
+    })
 
-    let chartData = {
+    export default {
         name: 'BarChart',
         components: { Bar },
         data() {
             return {
-                chartData: {
-                    labels: ['January', 'February', 'March'],
-                    datasets: [{ data: [40, 20, 12] }]
-                },
+                chartData: stats.value,
                 chartOptions: {
                     responsive: true
                 }
