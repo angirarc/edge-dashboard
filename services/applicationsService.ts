@@ -17,9 +17,9 @@ class ApplicationService {
       return ApplicationService.instance;
     }
 
-    public getApplication = async (): Promise<Application[] | undefined> => {
+    public getApplication = async (limit: number = 10): Promise<Application[] | undefined> => {
         try {
-            const response = await this.httpClient.get('/applications');
+            const response = await this.httpClient.get(`/applications?limit=${limit}`);
             if (response?.status === 200) {
                 return response.data;
             } else {

@@ -3,7 +3,7 @@
 
     const props = defineProps({
         options: Object as PropType<SwitchOption[]>,
-        active: Object as PropType<number>,
+        active: Number,
         selectOption: Function as PropType<(index: number) => void>
     });
     const { options, active, selectOption }: any = props;

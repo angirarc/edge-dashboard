@@ -1,9 +1,11 @@
-<!-- <script setup lang="ts">
-definePageMeta({
-  middleware: 'auth'
-})
-</script> -->
+<script setup lang="ts">
+  import Title from '@/components/Title';
+  import JobsTable from '@/components/JobsTable'
+</script>
 
 <template>
-    <h1>Welcome to your jobs</h1>
+  <div class="w-full">
+    <Title title="Career Opportunites" subtitle="Posted Jobs" />
+    <JobsTable limit="20" />
+  </div>
 </template>

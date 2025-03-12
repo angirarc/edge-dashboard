@@ -1,40 +1,29 @@
 <script setup lang="ts">
     import VueDatePicker from '@vuepic/vue-datepicker';
 
-    import { Search, Bell, Download } from 'lucide-vue-next';
+    import { Download } from 'lucide-vue-next';
     
     import type { SwitchOption } from '@/types';
 
+    import Title from '@/components/Title'
+
     const options: SwitchOption[] = [
-        { label: 'week', value: 'Weekly' },
-        { label: 'month', value: 'Monthly' },
-        { label: 'year', value: 'Yearly' },
+        { label: 'Weekly', value: 'week' },
+        { label: 'Monthly', value: 'month' },
+        { label: 'Yearly', value: 'year' },
     ];
     const active = ref(0);
+    const option = options[active.value].label;
+
     const selectOption = async (index: number) => {
         active.value = index;
         await nextTick()
     };
-    console.log({active})
 </script>
 
 <template>
     <div class="w-full">
-        <div class="flex justify-between items-center w-full mb-3">
-            <div>
-                <p class="text-gray-200">Overview</p>
-                <h2 class="text-3xl">Welcome to Edge</h2>
-            </div>
-            <div class="flex ">
-                <div class="flex border border-gray-400 rounded-md items-center px-3 py-2 mr-3">
-                    <Search size="18" />
-                    <input class="ml-2" />
-                </div>
-                <button class="border bg-white rounded-md border-gray-400 py-2 px-3">
-                    <Bell size="18" />
-                </button>
-            </div>
-        </div>
+        <Title title="Overview" subtitle="Welcome to Edge" />
         <div class="w-full flex justify-between items-center">
             <Switch :options="options" :active="active" :selectOption="selectOption" />
             <div class="flex items-center">
@@ -45,9 +34,14 @@
                 <VueDatePicker class="py-2" range />
             </div>
         </div>
-        <BarChart />
+        <!-- <BarChart :period="option" /> -->
         <div class="flex justify-between mt-3">
-
+            <div class="w-2/3 pr-4">
+                <ApplicationsTable limit="10" />
+            </div>
+            <div class="pl-4 w-1/3">
+                <JobsTable limit="10" />
+            </div>
         </div>
     </div>
 </template>

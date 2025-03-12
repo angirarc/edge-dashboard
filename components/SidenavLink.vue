@@ -1,16 +1,16 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import type { Link } from '@/types';
 
 const route = useRoute();
 
 const props = defineProps({
     link: Object as PropType<Link>,
-    active: Object as PropType<string>,
-    setActive: Function as PropType<(link: string) => void>
 });
 
 const { link }: any = props.link;
-const isActive = link.path === route.path;
+const isActive = computed(() => link.path === route.path);
+
 </script>
 
 <template>

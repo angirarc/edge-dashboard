@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-export const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+export const baseURL = process.env.API_URL ?? 'http://localhost:5000';
 
 export class HttpClient {
   private axiosInstance?: AxiosInstance;
