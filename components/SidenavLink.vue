@@ -9,7 +9,7 @@ const props = defineProps({
     setActive: Function as PropType<(link: string) => void>
 });
 
-const { link } = props.link;
+const { link }: any = props.link;
 const isActive = link.path === route.path;
 </script>
 
