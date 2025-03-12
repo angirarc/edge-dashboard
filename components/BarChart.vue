@@ -1,47 +1,32 @@
-<script lang="ts">
-    import { onMounted, ref, defineProps } from 'vue';
+<script setup lang="ts">
     import { Bar } from 'vue-chartjs';
+    import { onMounted, ref, computed, type PropType } from 'vue';
     import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 
-    import statisticsService from '@/services/statisticsService';
+    import type { SwitchOption } from '@/types';
     
-    const props = defineProps({
-        period: Object as PropType<string>,
+    import { getState, subscribe } from "@/store/statsStore"
+
+    const stats = ref(getState().stats);
+
+    // Subscribe to store updates
+    subscribe((state) => {
+        stats.value = state.stats;
     });
 
-    ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+    ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
-    const stats = ref({
-        labels: [],
-        datasets: []
-    });
-
-    onMounted(() => {
-        console.log
-        const getStats = async () => {
-            try {
-                const result = await statisticsService.applicationStatistics(props.period);
-                console.log({result})
-                if (result) stats.value = result
-            } catch (e) {
-                alert(`An error occurred when fetching this data`)
-            }
+    const chartOptions = {
+        responsive: true,
+        animation: {
+            duration: 750,
+            easing: 'easeInOutQuart'
         }
-        getStats();
-    })
+    };
 
-    export default {
-        name: 'BarChart',
-        components: { Bar },
-        data() {
-            return {
-                chartData: stats.value,
-                chartOptions: {
-                    responsive: true
-                }
-            }
-        }
-    }
+    const chartData = computed(() => stats.value);
+
+    onMounted(() => getState().getStatistics('week'));
 </script>
 
 <template>

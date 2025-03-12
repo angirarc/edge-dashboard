@@ -1,8 +1,8 @@
 <script setup lang="ts">
+    import { ref } from "vue";
+    import { Download } from 'lucide-vue-next';
     import VueDatePicker from '@vuepic/vue-datepicker';
 
-    import { Download } from 'lucide-vue-next';
-    
     import type { SwitchOption } from '@/types';
 
     import Title from '@/components/Title'
@@ -12,20 +12,13 @@
         { label: 'Monthly', value: 'month' },
         { label: 'Yearly', value: 'year' },
     ];
-    const active = ref(0);
-    const option = options[active.value].label;
-
-    const selectOption = async (index: number) => {
-        active.value = index;
-        await nextTick()
-    };
 </script>
 
 <template>
     <div class="w-full">
         <Title title="Overview" subtitle="Welcome to Edge" />
-        <div class="w-full flex justify-between items-center">
-            <Switch :options="options" :active="active" :selectOption="selectOption" />
+        <div class="w-full flex justify-between items-center mb-4">
+            <Switch :options="options" />
             <div class="flex items-center">
                 <button class="border mr-3 bg-black rounded-md flex justify-between items-center py-2 px-4">
                     <span class="text-white mr-2">Download</span>
@@ -34,8 +27,8 @@
                 <VueDatePicker class="py-2" range />
             </div>
         </div>
-        <BarChart :period="option" />
-        <div class="flex justify-between mt-3">
+        <BarChart /> 
+        <div class="flex justify-between mt-6">
             <div class="w-1/2 pr-4">
                 <ApplicationsTable limit="10" />
             </div>
